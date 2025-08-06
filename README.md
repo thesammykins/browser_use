@@ -61,7 +61,7 @@ ANTHROPIC_API_KEY=your-anthropic-api-key-here
 # Optional: Configure specific models and provider preference
 BROWSER_USE_PREFERRED_PROVIDER=openai
 BROWSER_USE_OPENAI_MODEL=gpt-4o
-BROWSER_USE_ANTHROPIC_MODEL=claude-3-5-sonnet-20241022
+BROWSER_USE_ANTHROPIC_MODEL=claude-sonnet-4-20250514
 ```
 
 ### 3. Run Your First Task
@@ -196,7 +196,7 @@ AZURE_OPENAI_API_KEY=your-azure-api-key-here
 # Model Configuration (optional)
 BROWSER_USE_PREFERRED_PROVIDER=openai
 BROWSER_USE_OPENAI_MODEL=gpt-4o
-BROWSER_USE_ANTHROPIC_MODEL=claude-3-5-sonnet-20241022
+BROWSER_USE_ANTHROPIC_MODEL=claude-sonnet-4-20250514
 BROWSER_USE_GOOGLE_MODEL=gemini-2.0-flash-exp
 BROWSER_USE_GROQ_MODEL=llama-3.3-70b-versatile
 BROWSER_USE_AZURE_MODEL=gpt-4o
@@ -247,10 +247,10 @@ The agent supports multiple LLM providers:
 
 | Provider | Model Examples | API Key | Model Config |
 |----------|----------------|---------|--------------|
-| OpenAI | gpt-4o, gpt-4o-mini, gpt-4-turbo | `OPENAI_API_KEY` | `BROWSER_USE_OPENAI_MODEL` |
-| Anthropic | claude-3-5-sonnet-20241022, claude-3-opus-20240229 | `ANTHROPIC_API_KEY` | `BROWSER_USE_ANTHROPIC_MODEL` |
-| Google | gemini-2.0-flash-exp, gemini-1.5-pro | `GOOGLE_API_KEY` | `BROWSER_USE_GOOGLE_MODEL` |
-| Groq | llama-3.3-70b-versatile, mixtral-8x7b-32768 | `GROQ_API_KEY` | `BROWSER_USE_GROQ_MODEL` |
+| OpenAI | gpt-4o, gpt-4o-mini, gpt-4-turbo, gpt-3.5-turbo | `OPENAI_API_KEY` | `BROWSER_USE_OPENAI_MODEL` |
+| Anthropic | claude-sonnet-4-20250514, claude-opus-4-20250514, claude-3-7-sonnet-20250219, claude-3-5-sonnet-20241022 | `ANTHROPIC_API_KEY` | `BROWSER_USE_ANTHROPIC_MODEL` |
+| Google | gemini-2.0-flash-exp, gemini-1.5-pro, gemini-1.5-flash | `GOOGLE_API_KEY` | `BROWSER_USE_GOOGLE_MODEL` |
+| Groq | llama-3.3-70b-versatile, llama3-70b-8192, mixtral-8x7b-32768 | `GROQ_API_KEY` | `BROWSER_USE_GROQ_MODEL` |
 | Azure OpenAI | gpt-4o, gpt-4-turbo | `AZURE_OPENAI_API_KEY` | `BROWSER_USE_AZURE_MODEL` |
 
 ### Model Selection Priority
@@ -343,7 +343,7 @@ python browser_agent.py --provider openai --model gpt-4o-mini --url "..." --task
 **6. Model not working as expected**
 ```bash
 # Try different model for better performance
-python browser_agent.py --provider anthropic --model claude-3-5-sonnet-20241022 --url "..." --task "..."
+python browser_agent.py --provider anthropic --model claude-sonnet-4-20250514 --url "..." --task "..."
 
 # Check available models in your .env configuration
 ```
@@ -412,6 +412,7 @@ This project is built on top of [browser-use](https://github.com/browser-use/bro
 6. **Check Logs**: Review `browser_agent.log` for detailed execution information
 7. **Handle Authentication**: Use `storage_state` for logged-in sessions
 8. **Respect Rate Limits**: Be mindful of website rate limiting and terms of service
+9. **Choose Right Model**: Use faster models (gpt-4o-mini, claude-3-5-haiku-20241022) for simple tasks, more capable models (claude-sonnet-4-20250514, gpt-4o) for complex workflows
 
 ## 📋 Quick Setup Checklist
 

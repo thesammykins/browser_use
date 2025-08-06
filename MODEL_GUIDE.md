@@ -32,7 +32,7 @@ python browser_agent.py \
 
 ### 🤖 OpenAI
 
-**API Key:** `OPENAI_API_KEY`  
+**API Key:** `OPENAI_API_KEY`
 **Model Config:** `BROWSER_USE_OPENAI_MODEL`
 
 ```env
@@ -43,32 +43,29 @@ BROWSER_USE_OPENAI_MODEL=gpt-4o  # Default
 **Available Models:**
 - `gpt-4o` (Recommended - Best performance)
 - `gpt-4o-mini` (Faster and cheaper)
-- `gpt-4-turbo` (Previous generation)
-- `gpt-4` (Standard GPT-4)
 
 **Best for:** General automation, complex reasoning, reliable performance
 
 ### 🧠 Anthropic
 
-**API Key:** `ANTHROPIC_API_KEY`  
+**API Key:** `ANTHROPIC_API_KEY`
 **Model Config:** `BROWSER_USE_ANTHROPIC_MODEL`
 
 ```env
 ANTHROPIC_API_KEY=sk-ant-your-key-here
-BROWSER_USE_ANTHROPIC_MODEL=claude-3-5-sonnet-20241022  # Default
+BROWSER_USE_ANTHROPIC_MODEL=claude-sonnet-4-20250514  # Default (Latest)
 ```
 
 **Available Models:**
-- `claude-3-5-sonnet-20241022` (Recommended - Latest version)
-- `claude-3-5-sonnet-20240620` (Previous version)
-- `claude-3-opus-20240229` (Most capable but slower)
-- `claude-3-haiku-20240307` (Fastest and cheapest)
+- `claude-opus-4-20250514` (Latest - Most capable)
+- `claude-sonnet-4-20250514` (Latest - High performance, recommended)
+- `claude-3-7-sonnet-20250219` (Extended thinking capabilities)
 
 **Best for:** Detailed analysis, safety-conscious automation, code generation
 
 ### 🔍 Google
 
-**API Key:** `GOOGLE_API_KEY`  
+**API Key:** `GOOGLE_API_KEY`
 **Model Config:** `BROWSER_USE_GOOGLE_MODEL`
 
 ```env
@@ -78,14 +75,17 @@ BROWSER_USE_GOOGLE_MODEL=gemini-2.0-flash-exp  # Default
 
 **Available Models:**
 - `gemini-2.0-flash-exp` (Recommended - Latest experimental)
-- `gemini-1.5-pro` (Pro version)
-- `gemini-1.5-flash` (Fast version)
+- `gemini-2.0-flash-live-001` (For live/realtime applications)
+
+**Partner Models:**
+- `meta/llama-3.1-405b-instruct-maas` (Llama via Vertex AI)
+- Various other partner models available
 
 **Best for:** Multi-modal tasks, experimental features
 
 ### ⚡ Groq
 
-**API Key:** `GROQ_API_KEY`  
+**API Key:** `GROQ_API_KEY`
 **Model Config:** `BROWSER_USE_GROQ_MODEL`
 
 ```env
@@ -96,14 +96,17 @@ BROWSER_USE_GROQ_MODEL=llama-3.3-70b-versatile  # Default
 **Available Models:**
 - `llama-3.3-70b-versatile` (Recommended - Latest Llama)
 - `llama-3.1-70b-versatile` (Previous version)
-- `mixtral-8x7b-32768` (Alternative architecture)
+- `llama3-70b-8192` (Llama 3 with 8K context)
+- `llama3-8b-8192` (Smaller, faster Llama 3)
+- `mixtral-8x7b-32768` (Mixtral with 32K context)
+- `whisper-large-v3-turbo` (Audio transcription)
 
 **Best for:** Fast inference, cost-effective automation
 
 ### ☁️ Azure OpenAI
 
-**API Key:** `AZURE_OPENAI_API_KEY`  
-**Endpoint:** `AZURE_OPENAI_ENDPOINT`  
+**API Key:** `AZURE_OPENAI_API_KEY`
+**Endpoint:** `AZURE_OPENAI_ENDPOINT`
 **Model Config:** `BROWSER_USE_AZURE_MODEL`
 
 ```env
@@ -130,7 +133,7 @@ BROWSER_USE_OPENAI_MODEL=gpt-4o-mini
 
 # Fallback to Anthropic's fastest model
 ANTHROPIC_API_KEY=sk-ant-your-key-here
-BROWSER_USE_ANTHROPIC_MODEL=claude-3-haiku-20240307
+BROWSER_USE_ANTHROPIC_MODEL=claude-3-5-haiku-20241022
 ```
 
 ### Example 2: Performance-Optimized Setup
@@ -138,7 +141,7 @@ BROWSER_USE_ANTHROPIC_MODEL=claude-3-haiku-20240307
 ```env
 # Use the most capable models
 BROWSER_USE_PREFERRED_PROVIDER=anthropic
-BROWSER_USE_ANTHROPIC_MODEL=claude-3-5-sonnet-20241022
+BROWSER_USE_ANTHROPIC_MODEL=claude-sonnet-4-20250514
 
 # Fallback to OpenAI's best model
 OPENAI_API_KEY=sk-your-key-here
@@ -155,10 +158,10 @@ OPENAI_API_KEY=sk-your-key-here
 BROWSER_USE_OPENAI_MODEL=gpt-4o
 
 ANTHROPIC_API_KEY=sk-ant-your-key-here
-BROWSER_USE_ANTHROPIC_MODEL=claude-3-5-sonnet-20241022
+BROWSER_USE_ANTHROPIC_MODEL=claude-sonnet-4-20250514
 
 GOOGLE_API_KEY=your-key-here
-BROWSER_USE_GOOGLE_MODEL=gemini-1.5-pro
+BROWSER_USE_GOOGLE_MODEL=gemini-2.0-flash-exp
 
 GROQ_API_KEY=gsk-your-key-here
 BROWSER_USE_GROQ_MODEL=llama-3.3-70b-versatile
@@ -181,14 +184,14 @@ python browser_agent.py --model gpt-4o-mini --url "..." --task "..."
 ### Override Both Provider and Model
 
 ```bash
-python browser_agent.py --provider anthropic --model claude-3-haiku-20240307 --url "..." --task "..."
+python browser_agent.py --provider anthropic --model claude-3-5-haiku-20241022 --url "..." --task "..."
 ```
 
 ### Examples Script with Model Override
 
 ```bash
 python examples.py --example search --provider openai --model gpt-4o-mini
-python examples.py --all --provider anthropic --model claude-3-5-sonnet-20241022
+python examples.py --all --provider anthropic --model claude-sonnet-4-20250514
 ```
 
 ## Model Selection Strategy
@@ -204,18 +207,25 @@ python examples.py --all --provider anthropic --model claude-3-5-sonnet-20241022
 
 **For Simple Tasks (forms, clicking, basic navigation):**
 - `gpt-4o-mini` (OpenAI) - Fast and cheap
-- `claude-3-haiku-20240307` (Anthropic) - Very fast
+- `claude-3-5-haiku-20241022` (Anthropic) - Very fast
+- `llama3-8b-8192` (Groq) - Fastest and most cost-effective
 
 **For Complex Tasks (analysis, multi-step workflows):**
 - `gpt-4o` (OpenAI) - Reliable performance
-- `claude-3-5-sonnet-20241022` (Anthropic) - Latest capabilities
+- `claude-sonnet-4-20250514` (Anthropic) - Latest and most capable
+- `claude-opus-4-20250514` (Anthropic) - Ultimate capability
+
+**For Extended Reasoning:**
+- `claude-3-7-sonnet-20250219` (Anthropic) - Extended thinking capabilities
 
 **For Experimental Features:**
 - `gemini-2.0-flash-exp` (Google) - Cutting-edge features
+- `gemini-2.0-flash-live-001` (Google) - Real-time capabilities
 
 **For High-Volume Automation:**
 - `llama-3.3-70b-versatile` (Groq) - Fast inference
 - `gpt-4o-mini` (OpenAI) - Cost-effective
+- `claude-3-5-haiku-20241022` (Anthropic) - Fast and intelligent
 
 ## Troubleshooting
 
@@ -245,12 +255,13 @@ python test_setup.py
 ### Performance Issues
 
 **If model is too slow:**
-- Use faster models: `gpt-4o-mini`, `claude-3-haiku-20240307`
+- Use faster models: `gpt-4o-mini`, `claude-3-5-haiku-20241022`, `llama3-8b-8192`
 - Try Groq for fastest inference
 - Use `--headless` mode
 
 **If model gives poor results:**
-- Use more capable models: `gpt-4o`, `claude-3-5-sonnet-20241022`
+- Use more capable models: `gpt-4o`, `claude-sonnet-4-20250514`, `claude-opus-4-20250514`
+- Try extended thinking: `claude-3-7-sonnet-20250219`
 - Check task complexity
 - Try different provider
 
